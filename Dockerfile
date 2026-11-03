@@ -16,8 +16,8 @@ CMD if [ -z "$APP_KEY" ]; then \
       if [ ! -f storage/app/.runnerlog-key ]; then php -r 'echo "base64:" . base64_encode(random_bytes(32));' > storage/app/.runnerlog-key; fi; \
       export APP_KEY="$(cat storage/app/.runnerlog-key)"; \
     fi; \
-    if [ -n "$RENDER_EXTERNAL_URL" ]; then export APP_URL="$RENDER_EXTERNAL_URL"; fi; \
-    export APP_DEBUG=true APP_ENV=production DB_CONNECTION=sqlite SESSION_DRIVER=file CACHE_STORE=file QUEUE_CONNECTION=sync; \
+    export APP_URL="${RENDER_EXTERNAL_URL:-https://runnerlog.onrender.com}"; \
+    export APP_DEBUG=false APP_ENV=production DB_CONNECTION=sqlite SESSION_DRIVER=file CACHE_STORE=file QUEUE_CONNECTION=sync; \
     chown -R www-data:www-data storage bootstrap/cache database; chmod -R ug+rw storage bootstrap/cache database; \
     touch database/database.sqlite 2>/dev/null || true; chown www-data:www-data database/database.sqlite 2>/dev/null || true; chmod ug+rw database/database.sqlite 2>/dev/null || true; \
     php artisan config:clear; php artisan config:cache; php artisan route:cache; php artisan view:cache; \
