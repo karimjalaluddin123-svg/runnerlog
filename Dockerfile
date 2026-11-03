@@ -17,7 +17,7 @@ CMD if [ -z "$APP_KEY" ]; then \
       export APP_KEY="$(cat storage/app/.runnerlog-key)"; \
     fi; \
     if [ -n "$RENDER_EXTERNAL_URL" ]; then export APP_URL="$RENDER_EXTERNAL_URL"; fi; \
-    export APP_DEBUG=false APP_ENV=production SESSION_DRIVER=file CACHE_STORE=file QUEUE_CONNECTION=sync; \
+    export APP_DEBUG=true APP_ENV=production SESSION_DRIVER=file CACHE_STORE=file QUEUE_CONNECTION=sync; \
     chown -R www-data:www-data storage bootstrap/cache; chmod -R ug+rw storage bootstrap/cache; \
     php artisan config:clear; php artisan config:cache; php artisan route:cache; php artisan view:cache; \
     php artisan migrate --force; apache2-foreground
