@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
         return view('dashboard', compact('runs'));
     })->name('dashboard');
     Route::get('/gps-run', [\App\Http\Controllers\GpsRunController::class, 'tracker'])->name('gps.tracker');
+    Route::get('/gps-tracker', [\App\Http\Controllers\GpsRunController::class, 'tracker']);
     Route::post('/gps-run/save', [\App\Http\Controllers\GpsRunController::class, 'save'])->name('gps.save');
     Route::get('/runs/create', [\App\Http\Controllers\RunController::class, 'create'])->name('runs.create');
     Route::post('/runs', [\App\Http\Controllers\RunController::class, 'store'])->name('runs.store');
